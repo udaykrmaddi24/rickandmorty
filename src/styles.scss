@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #f5f7fa;
+}
+
+.search-box {
+    display: flex;
+    justify-self: flex-end;
+
+    width: 30%;
+    height: 42px;
+    padding: 0 14px;
+    margin: 12px 24px;
+
+    border: 1px solid #dfe3e8;
+    border-radius: 10px;
+    background: #fff;
+
+    input {
+        width: 100%;
+
+        border: none;
+        outline: none;
+        background: transparent;
+
+        font-size: 14px;
+        color: #1d2939;
+
+        &::placeholder {
+            color: #98a2b3;
+        }
+    }
+}
+
+.loading, .no-data {
+  padding: 30px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}

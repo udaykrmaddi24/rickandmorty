@@ -1,0 +1,42 @@
+.char-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.char-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.char-card {
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: lightgray;
+    padding: 10px;
+
+    .info-item {
+        .label {
+            font-weight: 600;
+        }
+    }
+}
+
+.char-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+// .char-card :hover {
+//   transform: scale(1.05);
+// }
+
+.characters-list-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+    padding: 10px;
+}
+

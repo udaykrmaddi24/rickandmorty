@@ -1,0 +1,29 @@
+<div class="page-container">
+    <div class="search-box">
+        <input type="text" [formControl]="searchControl" placeholder="Search by character name...">
+    </div>
+
+    <table>
+        <thead>
+            <th> Name </th>
+            <th> Air Date </th>
+            <th> Episode </th>
+        </thead>
+
+        <tbody>
+            @if(loading) {
+            <div class="loading"> Loading... </div>
+            }
+            @if(!loading && filteredEps().length == 0) {
+            <div class="no-data">No Data Available</div>
+            }
+            @for(ep of filteredEps(); track ep.id) {
+            <tr>
+                <td>{{ ep.name }}</td>
+                <td>{{ ep.air_date }}</td>
+                <td>{{ ep.episode }}</td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
