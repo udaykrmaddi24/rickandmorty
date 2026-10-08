@@ -30,10 +30,16 @@ export interface CharacterResponse {
 export class AppService {
   private http = inject(HttpClient);
 
-  getCharactersList(searchText?: string): Observable<CharacterResponse> {
-    const apiUrl = searchText ? 'https://rickandmortyapi.com/api/character?name='+searchText : 'https://rickandmortyapi.com/api/character';
-    return this.http.get<CharacterResponse>(apiUrl);
-  }
+  getCharactersList(searchText?: string, page: number = 1): Observable<CharacterResponse> {
+    let apiUrl = 'https://rickandmortyapi.com/api/character';
+
+    if (searchText) {
+      apiUrl += `?name=${searchText}&page=${page}`;
+    } else {
+      apiUrl += `?page=${page}`;
+    }
+  return this.http.get<CharacterResponse>(apiUrl);
+}
 
   getCharacterData(id: string): Observable<Character> {
     const apiUrl = `https://rickandmortyapi.com/api/character/${id}`;

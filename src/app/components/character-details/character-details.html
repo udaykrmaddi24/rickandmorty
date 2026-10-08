@@ -1,6 +1,11 @@
 <div class="page-container">
-    <div class="search-box">
-        <input type="text" [formControl]="searchControl" placeholder="Search by character name...">
+    <div class="top-bar">
+        <div class="search-box">
+            <input type="text" [formControl]="searchControl" placeholder="Search by character name...">
+        </div>
+        <div class="back-btn" routerLink="/">
+            Back
+        </div>
     </div>
 
     <table>

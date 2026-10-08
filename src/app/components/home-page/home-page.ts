@@ -1,14 +1,14 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { AppService, Character, CharacterResponse } from '../../service/app-service';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { catchError, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth-service';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatPaginatorModule],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
@@ -65,6 +65,25 @@ export class HomePage implements OnInit {
     this.router.navigate(['char-details', id]);
     // else 
     //   return;
+  }
+
+
+  onPageChange(event: PageEvent) {
+    const page = event.pageIndex + 1;
+    this.loading.set(true);
+    this.appService.getCharactersList('', page).subscribe({
+      next: res => {
+        this.characterdsData = res;
+        this.charactersList.set(res.results);
+      },
+      error: err => {
+        console.error(err);
+        this.charactersList.set([]);
+      },
+      complete: () => {
+        this.loading.set(false);
+      }
+    });
   }
 
 }

@@ -4,26 +4,31 @@
     </div>
     <div class="characters-list-section">
         @if(loading()) {
-            <div class="loading">Loading...</div>
+        <div class="loading">Loading...</div>
         }
         @if(!loading() && charactersList().length == 0) {
-            <div class="no-data">No Data Available</div>
+        <div class="no-data">No Data Available</div>
         }
         @for(char of charactersList(); track char?.id) {
-            <div class="char-card" (click)="navigateToCharDetails(char.id)">
-                <div class="char-info">
-                    <img [src]="char?.image">
-                    <div class="info-item"><span class="label"> Name: </span> <span>{{ char.name }} </span></div>
+        <div class="char-card" (click)="navigateToCharDetails(char.id)">
+            <div class="char-info">
+                <img [src]="char?.image" [alt]="char?.name" loading="lazy">
+                <div class="info-item"><span class="label"> Name: </span> <span>{{ char.name }} </span></div>
 
-                    <div class="info-item"><span class="label"> Status: </span> <span>{{ char.status }} </span></div>
-                    
-                    <div class="info-item"><span class="label"> Species: </span> <span>{{ char.species }} </span></div>
-                    
-                    <div class="info-item"><span class="label"> Gender: </span> <span>{{ char.gender }} </span></div>
-                    
-                    <div class="info-item"><span class="label"> No. Of Episodes: </span> <span>{{ char.episode.length }} </span></div>                   
-                </div>
+                <div class="info-item"><span class="label"> Status: </span> <span>{{ char.status }} </span></div>
+
+                <div class="info-item"><span class="label"> Species: </span> <span>{{ char.species }} </span></div>
+
+                <div class="info-item"><span class="label"> Gender: </span> <span>{{ char.gender }} </span></div>
+
+                <div class="info-item"><span class="label"> No. Of Episodes: </span> <span>{{ char.episode.length }}
+                    </span></div>
             </div>
+        </div>
         }
     </div>
+
+    <mat-paginator [length]="characterdsData?.info?.count ?? 0" [pageSize]="20" [pageSizeOptions]="[20]"
+        (page)="onPageChange($event)">
+    </mat-paginator>
 </div>
